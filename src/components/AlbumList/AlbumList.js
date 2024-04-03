@@ -1,7 +1,13 @@
-function AlbumList({ albums }) {
-  console.log("Albums => ", albums);
+import { Album } from "../Album";
 
-  return <div>This is Album List</div>;
+function AlbumList({ albums }) {
+  return (
+    <div>
+      {albums.map((album) => (
+        <Album key={album.id} album={album} />
+      ))}
+    </div>
+  );
 }
 
 export default AlbumList;

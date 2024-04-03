@@ -3,11 +3,14 @@ import "./style.scss";
 import { Button } from "../Button";
 import { GoTriangleDown, GoTriangleUp, GoX } from "react-icons/go";
 
-function Accordion({ title, description, children }) {
+function Accordion({ title, description, children, onExpand }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleClick = () => {
-    setIsExpanded((prevVal) => !prevVal);
+    setIsExpanded((prevVal) => {
+      onExpand(!prevVal);
+      return !prevVal;
+    });
   };
 
   const handleDelete = () => {};
@@ -34,8 +37,8 @@ function Accordion({ title, description, children }) {
           isExpanded ? "accordion__content--expanded" : ""
         }`}
       >
-        <p>{description}</p>
-        <div>{children}</div>
+        {description && <p>{description}</p>}
+        {children && <div>{children}</div>}
       </div>
     </section>
   );

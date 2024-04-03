@@ -1,4 +1,3 @@
-// import { Accordion } from "./components/Accordion";
 import { UserList } from "./components/UserList";
 import "./style.scss";
 

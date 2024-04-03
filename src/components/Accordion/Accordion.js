@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Button from "./Button";
+import "./style.scss";
+import { Button } from "../Button";
 import { GoTriangleDown, GoTriangleUp, GoX } from "react-icons/go";
 
 function Accordion({ title, description, children }) {

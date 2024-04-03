@@ -25,3 +25,11 @@ p,
 span {
   margin: 0;
 }
+
+.app {
+  width: 700px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

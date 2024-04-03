@@ -1,10 +1,13 @@
-import { Accordion } from "./components/Accordion";
+// import { Accordion } from "./components/Accordion";
+import { UserList } from "./components/UserList";
 import "./style.scss";
 
 function App() {
   return (
-    <div>
-      <Accordion title="Swati" description="Test description">
+    <div className="app">
+      <h1>List of Users</h1>
+      <UserList />
+      {/* <Accordion title="Swati" description="Test description">
         <Accordion
           title="child Accordion"
           description="Child Accordion Description"
@@ -17,7 +20,7 @@ function App() {
           title="child Accordion3"
           description="Child Accordion Description"
         />
-      </Accordion>
+      </Accordion> */}
     </div>
   );
 }

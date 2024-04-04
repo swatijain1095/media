@@ -4,7 +4,8 @@ import { Button } from "../Button";
 import "./style.scss";
 import { faker } from "@faker-js/faker";
 import { GoX } from "react-icons/go";
-import { Input } from "../Input";
+// import { Input } from "../Input";
+import { Input } from "ui-components";
 
 function AddUser({ fetchUsers }) {
   const [isExpanded, setIsExpanded] = useState(false);

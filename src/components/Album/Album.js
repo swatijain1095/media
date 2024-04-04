@@ -1,16 +1,19 @@
 import { Accordion } from "../Accordion";
 
-function Album({ album }) {
-  const { id, title, description } = album;
+function Album({ album, onDelete }) {
+  const { id, title, description, userId } = album;
 
   return (
     <div>
       <Accordion
         onExpand={() => {}}
+        id={id}
         key={id}
         title={title}
         description={description}
-        onDelete={() => {}}
+        onDelete={(id) => {
+          onDelete(id, userId);
+        }}
       ></Accordion>
     </div>
   );

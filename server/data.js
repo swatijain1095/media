@@ -23,10 +23,3 @@ module.exports = () => {
     albums,
   };
 };
-
-// generate users and albums array
-// genrate random values for user: id and name using faker.js
-// generate random values for albums: id, title, description
-// loop through albums again and add userId from users
-// mapping will be 3 albums will get 1 user
-// total count should be users: 5 and albums: 15

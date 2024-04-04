@@ -3,6 +3,8 @@ import { Accordion } from "../Accordion";
 import { Button } from "../Button";
 import { GoX } from "react-icons/go";
 import { faker } from "@faker-js/faker";
+import { Input } from "../Input";
+import "./style.scss";
 
 function AddAlbum({ fetchAlbums, id }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -54,7 +56,7 @@ function AddAlbum({ fetchAlbums, id }) {
         <GoX size={"2rem"} />
       </Button>
       <Button onClick={handleClick}>
-        {isExpanded ? `Submit` : `Add User`}
+        {isExpanded ? `Submit` : `Add Album`}
       </Button>
     </>
   );
@@ -64,17 +66,18 @@ function AddAlbum({ fetchAlbums, id }) {
       <Accordion
         isExpanded={isExpanded}
         customHeaderComponent={AlbumHeaderComponent}
+        className="add-album"
       >
-        <input
+        <Input
           value={titleInput}
           onChange={handleTitleChange}
           placeholder="Title"
-        />
-        <input
+        ></Input>
+        <Input
           value={descripInput}
           onChange={handleDescripChange}
           placeholder="Description"
-        />
+        ></Input>
       </Accordion>
     </div>
   );

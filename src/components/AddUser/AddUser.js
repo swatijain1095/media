@@ -4,6 +4,7 @@ import { Button } from "../Button";
 import "./style.scss";
 import { faker } from "@faker-js/faker";
 import { GoX } from "react-icons/go";
+import { Input } from "../Input";
 
 function AddUser({ fetchUsers }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -59,7 +60,11 @@ function AddUser({ fetchUsers }) {
         isExpanded={isExpanded}
         customHeaderComponent={HeaderComponent}
       >
-        <input value={inputValue} onChange={handleInputChange} />
+        <Input
+          value={inputValue}
+          onChange={handleInputChange}
+          placeholder="User Input..."
+        ></Input>
       </Accordion>
     </div>
   );

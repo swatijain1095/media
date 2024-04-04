@@ -1,0 +1,21 @@
+.input {
+  input {
+    border-radius: 8px;
+    border: 2px solid lightgray;
+    padding: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 100%;
+
+    &:focus,
+    &:focus-visible {
+      border-color: #3399ff;
+      box-shadow: 0 0 0 3px #b6daff;
+      outline: none;
+    }
+
+    &:hover {
+      border-color: #3399ff;
+    }
+  }
+}

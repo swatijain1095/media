@@ -1,0 +1,9 @@
+.add-album {
+  background-color: #e0ffdc;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

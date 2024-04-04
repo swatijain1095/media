@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Accordion } from "../Accordion";
 import { AlbumList } from "../AlbumList";
 
-function User({ user }) {
+function User({ user, onDelete }) {
   const { name, id } = user;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -19,10 +19,12 @@ function User({ user }) {
   return (
     <Accordion
       title={name}
+      id={id}
       onExpand={(val) => {
         val && fetchAlbums();
       }}
       description={`Album by ${name}`}
+      onDelete={onDelete}
     >
       {isLoading ? <div>Loading</div> : <AlbumList albums={albums} />}
     </Accordion>

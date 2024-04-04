@@ -10,6 +10,7 @@ function Album({ album }) {
         key={id}
         title={title}
         description={description}
+        onDelete={() => {}}
       ></Accordion>
     </div>
   );

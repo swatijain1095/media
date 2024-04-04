@@ -10,6 +10,16 @@ function UserList() {
     setUsers(users);
   }
 
+  async function deleteData(id) {
+    await fetch(`http://localhost:3001/users/${id}`, {
+      method: "DELETE",
+    });
+
+    const response = await fetch("http://localhost:3001/users");
+    const users = await response.json();
+    setUsers(users);
+  }
+
   useEffect(() => {
     listUser();
   }, []);
@@ -17,7 +27,7 @@ function UserList() {
   return (
     <div>
       {users.map((user) => (
-        <User key={user.id} user={user} />
+        <User key={user.id} user={user} onDelete={deleteData} />
       ))}
     </div>
   );

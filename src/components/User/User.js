@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Accordion } from "../Accordion";
 import { AlbumList } from "../AlbumList";
-import { Button } from "../Button";
 import "./style.scss";
+import { AddAlbum } from "../AddAlbum";
 
 function User({ user, onDelete }) {
   const { name, id } = user;
@@ -37,7 +37,7 @@ function User({ user, onDelete }) {
       ) : (
         <>
           <p>{`Album by ${name}`}</p>
-          <Button>Add Album</Button>
+          <AddAlbum fetchAlbums={fetchAlbums} id={id} />
           <AlbumList albums={albums} updateAlbum={updateAlbum} />
         </>
       )}

@@ -21,12 +21,12 @@ function Accordion({ title, description, children, onExpand, onDelete, id }) {
     <section className="accordion">
       <header>
         <div className="left-header">
-          <Button onClick={handleDelete}>
+          <Button btnType="icon" onClick={handleDelete}>
             <GoX size={"2rem"} />
           </Button>
           <h3>{title}</h3>
         </div>
-        <Button onClick={handleClick}>
+        <Button btnType="icon" onClick={handleClick}>
           {isExpanded ? (
             <GoTriangleUp size={"2rem"} />
           ) : (

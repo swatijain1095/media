@@ -4,14 +4,31 @@
   font-size: 1rem;
   text-decoration: none;
   padding: 5px;
-  height: 50px;
+  height: 40px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
 
-  &:hover {
-    background-color: whitesmoke;
+  &--primary {
+    background-color: #3963cc;
+    color: white;
+    border-radius: 5px;
+    padding: 0px 18px;
+
+    &:hover {
+      background-color: #2f4fa1;
+      box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &--icon {
+    border-radius: 50%;
+    width: 40px;
+
+    &:hover {
+      background-color: lightgray;
+    }
   }
 }

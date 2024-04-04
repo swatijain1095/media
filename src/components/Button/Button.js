@@ -1,8 +1,10 @@
 import "./style.scss";
+import classNames from "classnames";
 
-function Button({ children, ...rest }) {
+function Button({ children, btnType = "primary", ...rest }) {
+  const btnClass = classNames("button", `button--${btnType}`);
   return (
-    <button className="button" {...rest}>
+    <button className={btnClass} {...rest}>
       {children}
     </button>
   );

@@ -9,7 +9,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px;
+    padding: 10px;
+
+    &.--expanded {
+      border-bottom: 1px solid lightgray;
+      box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
+    }
 
     .left-header {
       display: flex;
@@ -27,7 +32,7 @@
 
     &--expanded {
       height: auto;
-      margin: 10px;
+      padding: 20px;
     }
   }
 }

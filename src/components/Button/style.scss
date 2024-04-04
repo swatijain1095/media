@@ -1,6 +1,5 @@
 .button {
   border: none;
-  background-color: white;
   font-size: 1rem;
   text-decoration: none;
   padding: 5px;
@@ -26,6 +25,7 @@
   &--icon {
     border-radius: 50%;
     width: 40px;
+    background-color: whitesmoke;
 
     &:hover {
       background-color: lightgray;

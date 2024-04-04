@@ -2,8 +2,9 @@ import { useState } from "react";
 import "./style.scss";
 import { Button } from "../Button";
 import { GoTriangleDown, GoTriangleUp, GoX } from "react-icons/go";
+import classNames from "classnames";
 
-function Accordion({ title, description, children, onExpand, onDelete, id }) {
+function Accordion({ title, children, onExpand, onDelete, id, className }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleClick = () => {
@@ -18,8 +19,8 @@ function Accordion({ title, description, children, onExpand, onDelete, id }) {
   };
 
   return (
-    <section className="accordion">
-      <header>
+    <section className={classNames("accordion", className)}>
+      <header className={classNames(isExpanded && "--expanded")}>
         <div className="left-header">
           <Button btnType="icon" onClick={handleDelete}>
             <GoX size={"2rem"} />
@@ -34,14 +35,15 @@ function Accordion({ title, description, children, onExpand, onDelete, id }) {
           )}
         </Button>
       </header>
-      <div
-        className={`accordion__content ${
-          isExpanded ? "accordion__content--expanded" : ""
-        }`}
-      >
-        {description && <p>{description}</p>}
-        {children && <div>{children}</div>}
-      </div>
+      {children && (
+        <div
+          className={`accordion__content ${
+            isExpanded ? "accordion__content--expanded" : ""
+          }`}
+        >
+          <div className={`${className}__content`}>{children}</div>
+        </div>
+      )}
     </section>
   );
 }

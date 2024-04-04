@@ -1,0 +1,9 @@
+.user {
+  background-color: #f5f6fa;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Accordion } from "../Accordion";
 import { AlbumList } from "../AlbumList";
+import { Button } from "../Button";
+import "./style.scss";
 
 function User({ user, onDelete }) {
   const { name, id } = user;
@@ -27,13 +29,17 @@ function User({ user, onDelete }) {
       onExpand={(val) => {
         val && fetchAlbums();
       }}
-      description={`Album by ${name}`}
       onDelete={onDelete}
+      className="user"
     >
       {isLoading ? (
         <div>Loading</div>
       ) : (
-        <AlbumList albums={albums} updateAlbum={updateAlbum} />
+        <>
+          <p>{`Album by ${name}`}</p>
+          <Button>Add User</Button>
+          <AlbumList albums={albums} updateAlbum={updateAlbum} />
+        </>
       )}
     </Accordion>
   );

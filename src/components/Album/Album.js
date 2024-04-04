@@ -1,4 +1,5 @@
 import { Accordion } from "../Accordion";
+import "./style.scss";
 
 function Album({ album, onDelete }) {
   const { id, title, description, userId } = album;
@@ -10,11 +11,13 @@ function Album({ album, onDelete }) {
         id={id}
         key={id}
         title={title}
-        description={description}
         onDelete={(id) => {
           onDelete(id, userId);
         }}
-      ></Accordion>
+        className="album"
+      >
+        <p>{description}</p>
+      </Accordion>
     </div>
   );
 }

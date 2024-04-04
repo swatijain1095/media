@@ -5,7 +5,7 @@ import "./style.scss";
 import { faker } from "@faker-js/faker";
 import { GoX } from "react-icons/go";
 
-function AddUser() {
+function AddUser({ fetchUsers }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
@@ -14,7 +14,7 @@ function AddUser() {
       setIsExpanded(true);
     } else {
       handleSubmit();
-      setIsExpanded(false);
+      handleReset();
     }
   };
 
@@ -33,6 +33,7 @@ function AddUser() {
         name: inputValue,
       }),
     });
+    fetchUsers();
   };
 
   const handleReset = () => {

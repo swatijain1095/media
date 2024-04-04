@@ -5,7 +5,7 @@ import { AddUser } from "../AddUser";
 function UserList() {
   const [users, setUsers] = useState([]);
 
-  async function listUser() {
+  async function fetchUsers() {
     const response = await fetch("http://localhost:3001/users");
     const users = await response.json();
     setUsers(users);
@@ -15,19 +15,16 @@ function UserList() {
     await fetch(`http://localhost:3001/users/${id}`, {
       method: "DELETE",
     });
-
-    const response = await fetch("http://localhost:3001/users");
-    const users = await response.json();
-    setUsers(users);
+    fetchUsers();
   }
 
   useEffect(() => {
-    listUser();
+    fetchUsers();
   }, []);
 
   return (
     <div>
-      <AddUser />
+      <AddUser fetchUsers={fetchUsers} />
       {users.map((user) => (
         <User key={user.id} user={user} onDelete={deleteData} />
       ))}

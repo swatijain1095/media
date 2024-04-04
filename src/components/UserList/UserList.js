@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { User } from "../User";
+import { AddUser } from "../AddUser";
 
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -26,6 +27,7 @@ function UserList() {
 
   return (
     <div>
+      <AddUser />
       {users.map((user) => (
         <User key={user.id} user={user} onDelete={deleteData} />
       ))}

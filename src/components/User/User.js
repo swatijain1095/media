@@ -37,7 +37,7 @@ function User({ user, onDelete }) {
       ) : (
         <>
           <p>{`Album by ${name}`}</p>
-          <Button>Add User</Button>
+          <Button>Add Album</Button>
           <AlbumList albums={albums} updateAlbum={updateAlbum} />
         </>
       )}

@@ -5,7 +5,7 @@ import TestComponent from "./components/TestComponent";
 function App() {
   return (
     <div className="app">
-      <TestComponent />
+      {/* <TestComponent /> */}
       <h1>List of Users</h1>
       <UserList />
       {/* <Accordion title="Swati" description="Test description">

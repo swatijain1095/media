@@ -3,7 +3,7 @@ import "./style.scss";
 import { Button } from "../Button";
 import { GoTriangleDown, GoTriangleUp, GoX } from "react-icons/go";
 import classNames from "classnames";
-import gif from "../../assets/ZKZg.gif";
+import { Loading } from "../Loading";
 
 function Accordion({
   title,
@@ -47,9 +47,6 @@ function Accordion({
               <h3>{title}</h3>
             </div>
             <div className="right-header">
-              {isLoading && (
-                <img src={gif} width="24px" height="24px" alt="Loading..." />
-              )}
               <Button btnType="icon" onClick={handleClick}>
                 {isExpanded ? (
                   <GoTriangleUp size={"2rem"} />
@@ -67,6 +64,7 @@ function Accordion({
             isExpanded ? "accordion__content--expanded" : ""
           }`}
         >
+          {isLoading && <Loading />}
           <div className={`${className}__content`}>{children}</div>
         </div>
       )}

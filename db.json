@@ -19,6 +19,10 @@
     {
       "id": "8654dcf0-5d88-4fce-83a5-6f2f12d3cec2",
       "name": "Wilson Gorczany"
+    },
+    {
+      "id": "4e425bf7-3741-467c-93eb-f595b1766b53",
+      "name": "test"
     }
   ],
   "albums": [
@@ -27,7 +31,9 @@
       "title": "Luxurious Metal Chicken",
       "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
       "userId": "316b04ca-cc0e-4c3c-82a9-0259b953f064",
-      "images": ["/uploads/1712317145668.png"]
+      "images": [
+        "/uploads/1712317145668.png"
+      ]
     },
     {
       "id": "2dbc5157-fee8-43b8-a19a-ffc0b1fa74a0",

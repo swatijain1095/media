@@ -10,13 +10,20 @@ function AddAlbum({ fetchAlbums, id }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [titleInput, setTitleInput] = useState("");
   const [descripInput, setDescripInput] = useState("");
+  const [isDescriptionError, setIsDescriptionError] = useState(false);
+  const [isTitleError, setIsTitleError] = useState(false);
 
   const handleClick = () => {
     if (!isExpanded) {
       setIsExpanded(true);
     } else {
-      handleSubmit();
-      handleReset();
+      if (titleInput === "" || descripInput === "") {
+        setIsTitleError(titleInput === "");
+        setIsDescriptionError(descripInput === "");
+      } else {
+        handleSubmit();
+        handleReset();
+      }
     }
   };
 
@@ -48,6 +55,8 @@ function AddAlbum({ fetchAlbums, id }) {
     setIsExpanded(false);
     setDescripInput("");
     setTitleInput("");
+    setIsDescriptionError(false);
+    setIsTitleError(false);
   };
 
   const AlbumHeaderComponent = (
@@ -69,11 +78,23 @@ function AddAlbum({ fetchAlbums, id }) {
         className="add-album"
       >
         <Input
+          error={
+            isTitleError && {
+              isError: true,
+              errorMsg: "Please add Title!",
+            }
+          }
           value={titleInput}
           onChange={handleTitleChange}
           placeholder="Title"
         ></Input>
         <Input
+          error={
+            isDescriptionError && {
+              isError: true,
+              errorMsg: "Please add Description!",
+            }
+          }
           value={descripInput}
           onChange={handleDescripChange}
           placeholder="Description"

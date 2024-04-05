@@ -9,13 +9,18 @@ import { Input } from "../Input";
 function AddUser({ fetchUsers }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const handleClick = () => {
     if (!isExpanded) {
       setIsExpanded(true);
     } else {
-      handleSubmit();
-      handleReset();
+      if (inputValue === "") {
+        setIsError(true);
+      } else {
+        handleSubmit();
+        handleReset();
+      }
     }
   };
 
@@ -40,6 +45,7 @@ function AddUser({ fetchUsers }) {
   const handleReset = () => {
     setIsExpanded(false);
     setInputValue("");
+    setIsError(false);
   };
 
   const HeaderComponent = (
@@ -61,6 +67,12 @@ function AddUser({ fetchUsers }) {
         customHeaderComponent={HeaderComponent}
       >
         <Input
+          error={
+            isError && {
+              isError: true,
+              errorMsg: "Please enter User Name!",
+            }
+          }
           value={inputValue}
           onChange={handleInputChange}
           placeholder="User Input..."

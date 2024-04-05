@@ -1,12 +1,21 @@
 import classNames from "classnames";
 import "./style.scss";
 
-function Input(props) {
+function Input({ error = {}, ...rest }) {
+  const { isError, errorMsg } = error;
   return (
-    <input
-      className={classNames("input", props.type === "file" && "input--file")}
-      {...props}
-    />
+    <div>
+      <input
+        className={classNames(
+          "input",
+          rest.type === "file" && "input--file",
+          isError && "input--error"
+        )}
+        {...rest}
+      />
+
+      {errorMsg && <label>{errorMsg}</label>}
+    </div>
   );
 }
 

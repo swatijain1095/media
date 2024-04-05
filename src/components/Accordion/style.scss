@@ -21,6 +21,11 @@
       gap: 10px;
       align-items: center;
     }
+
+    .right-header {
+      display: flex;
+      align-items: center;
+    }
   }
 
   &__content {

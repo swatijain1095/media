@@ -18,10 +18,6 @@ function User({ user, onDelete }) {
     setIsLoading(false);
   }
 
-  const updateAlbum = (albums) => {
-    setAlbums(albums);
-  };
-
   return (
     <Accordion
       title={name}
@@ -31,16 +27,13 @@ function User({ user, onDelete }) {
       }}
       onDelete={onDelete}
       className="user"
+      isLoading={isLoading}
     >
-      {isLoading ? (
-        <div>Loading</div>
-      ) : (
-        <>
-          <p>{`Album by ${name}`}</p>
-          <AddAlbum fetchAlbums={fetchAlbums} id={id} />
-          <AlbumList albums={albums} updateAlbum={updateAlbum} />
-        </>
-      )}
+      <>
+        <p>{`Album by ${name}`}</p>
+        <AddAlbum fetchAlbums={fetchAlbums} id={id} />
+        <AlbumList albums={albums} updateAlbum={fetchAlbums} />
+      </>
     </Accordion>
   );
 }

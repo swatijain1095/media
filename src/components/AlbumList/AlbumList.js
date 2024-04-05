@@ -5,17 +5,19 @@ function AlbumList({ albums, updateAlbum }) {
     await fetch(`http://localhost:3001/albums/${id}`, {
       method: "DELETE",
     });
-    const response = await fetch(
-      `http://localhost:3001/users/${userId}/albums`
-    );
-    const albums = await response.json();
-    updateAlbum(albums);
+
+    updateAlbum();
   }
 
   return (
     <div>
       {albums.map((album) => (
-        <Album key={album.id} album={album} onDelete={deleteAlbum} />
+        <Album
+          key={album.id}
+          album={album}
+          onDelete={deleteAlbum}
+          updateAlbum={updateAlbum}
+        />
       ))}
     </div>
   );

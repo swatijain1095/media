@@ -22,6 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "data": "json-server ./server/data.js --watch --port 3001",
+    "server": "json-server --watch db.json --port 3001",
     "cdn": "node cdn.js",
     "build": "react-scripts build",
     "test": "react-scripts test",

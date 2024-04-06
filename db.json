@@ -21,8 +21,8 @@
       "name": "Wilson Gorczany"
     },
     {
-      "id": "4e425bf7-3741-467c-93eb-f595b1766b53",
-      "name": "test"
+      "id": "b1830193-3230-4d60-97d9-e2b601e74c9e",
+      "name": "Test User"
     }
   ],
   "albums": [
@@ -131,6 +131,13 @@
       "title": "Licensed Frozen Salad",
       "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
       "userId": "8654dcf0-5d88-4fce-83a5-6f2f12d3cec2",
+      "images": []
+    },
+    {
+      "id": "f91a186b-5010-4ec9-9a28-1e79b4371eb4",
+      "title": "Test Title ",
+      "description": "Test Description",
+      "userId": "b1830193-3230-4d60-97d9-e2b601e74c9e",
       "images": []
     }
   ]

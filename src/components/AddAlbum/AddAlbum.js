@@ -5,30 +5,22 @@ import { GoX } from "react-icons/go";
 import { faker } from "@faker-js/faker";
 import { Input } from "../Input";
 import "./style.scss";
-import { useFormField } from "../../hooks/useFormField";
+import { useFormFields } from "../../hooks/useFormFields";
 
 function AddAlbum({ fetchAlbums, id }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const {
-    value: titleInput,
-    isError: isTitleError,
-    handleChange: handleTitleChange,
-    reset: resetTitle,
-    checkError: checkTitleError,
-  } = useFormField();
-  const {
-    value: descriptionInput,
-    isError: isDescriptionError,
-    handleChange: handleDescriptionChange,
-    reset: resetDescription,
-    checkError: checkDescriptionError,
-  } = useFormField();
+    formFields: { title, description },
+    handleFieldChange,
+    checkFieldError,
+    resetFields,
+  } = useFormFields(["title", "description"]);
 
   const handleClick = () => {
     if (!isExpanded) {
       setIsExpanded(true);
     } else {
-      if (!checkTitleError() || !checkDescriptionError()) {
+      if (!checkFieldError()) {
         handleSubmit();
         handleReset();
       }
@@ -43,8 +35,8 @@ function AddAlbum({ fetchAlbums, id }) {
       },
       body: JSON.stringify({
         id: faker.string.uuid(),
-        title: titleInput,
-        description: descriptionInput,
+        title: title.value,
+        description: description.value,
         userId: id,
         images: [],
       }),
@@ -54,8 +46,7 @@ function AddAlbum({ fetchAlbums, id }) {
 
   const handleReset = () => {
     setIsExpanded(false);
-    resetTitle();
-    resetDescription();
+    resetFields();
   };
 
   const AlbumHeaderComponent = (
@@ -77,25 +68,27 @@ function AddAlbum({ fetchAlbums, id }) {
         className="add-album"
       >
         <Input
+          id="title"
           error={
-            isTitleError && {
+            title.isError && {
               isError: true,
               errorMsg: "Please add Title!",
             }
           }
-          value={titleInput}
-          onChange={handleTitleChange}
+          value={title.value}
+          onChange={handleFieldChange}
           placeholder="Title"
         ></Input>
         <Input
+          id="description"
           error={
-            isDescriptionError && {
+            description.isError && {
               isError: true,
               errorMsg: "Please add Description!",
             }
           }
-          value={descriptionInput}
-          onChange={handleDescriptionChange}
+          value={description.value}
+          onChange={handleFieldChange}
           placeholder="Description"
         ></Input>
       </Accordion>

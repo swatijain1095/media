@@ -5,27 +5,21 @@ import "./style.scss";
 import { faker } from "@faker-js/faker";
 import { GoX } from "react-icons/go";
 import { Input } from "../Input";
+import { useFormField } from "../../hooks/useFormField";
 
 function AddUser({ fetchUsers }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-  const [isError, setIsError] = useState(false);
+  const { value, isError, handleChange, reset, checkError } = useFormField();
 
   const handleClick = () => {
     if (!isExpanded) {
       setIsExpanded(true);
     } else {
-      if (inputValue === "") {
-        setIsError(true);
-      } else {
+      if (!checkError()) {
         handleSubmit();
         handleReset();
       }
     }
-  };
-
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
   };
 
   const handleSubmit = async () => {
@@ -36,7 +30,7 @@ function AddUser({ fetchUsers }) {
       },
       body: JSON.stringify({
         id: faker.string.uuid(),
-        name: inputValue,
+        name: value,
       }),
     });
     fetchUsers();
@@ -44,8 +38,7 @@ function AddUser({ fetchUsers }) {
 
   const handleReset = () => {
     setIsExpanded(false);
-    setInputValue("");
-    setIsError(false);
+    reset();
   };
 
   const HeaderComponent = (
@@ -73,8 +66,8 @@ function AddUser({ fetchUsers }) {
               errorMsg: "Please enter User Name!",
             }
           }
-          value={inputValue}
-          onChange={handleInputChange}
+          value={value}
+          onChange={handleChange}
           placeholder="User Input..."
         ></Input>
       </Accordion>

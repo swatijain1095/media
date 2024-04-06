@@ -5,34 +5,34 @@ import { GoX } from "react-icons/go";
 import { faker } from "@faker-js/faker";
 import { Input } from "../Input";
 import "./style.scss";
+import { useFormField } from "../../hooks/useFormField";
 
 function AddAlbum({ fetchAlbums, id }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [titleInput, setTitleInput] = useState("");
-  const [descripInput, setDescripInput] = useState("");
-  const [isDescriptionError, setIsDescriptionError] = useState(false);
-  const [isTitleError, setIsTitleError] = useState(false);
+  const {
+    value: titleInput,
+    isError: isTitleError,
+    handleChange: handleTitleChange,
+    reset: resetTitle,
+    checkError: checkTitleError,
+  } = useFormField();
+  const {
+    value: descriptionInput,
+    isError: isDescriptionError,
+    handleChange: handleDescriptionChange,
+    reset: resetDescription,
+    checkError: checkDescriptionError,
+  } = useFormField();
 
   const handleClick = () => {
     if (!isExpanded) {
       setIsExpanded(true);
     } else {
-      if (titleInput === "" || descripInput === "") {
-        setIsTitleError(titleInput === "");
-        setIsDescriptionError(descripInput === "");
-      } else {
+      if (!checkTitleError() || !checkDescriptionError()) {
         handleSubmit();
         handleReset();
       }
     }
-  };
-
-  const handleTitleChange = (event) => {
-    setTitleInput(event.target.value);
-  };
-
-  const handleDescripChange = (event) => {
-    setDescripInput(event.target.value);
   };
 
   const handleSubmit = async () => {
@@ -44,8 +44,9 @@ function AddAlbum({ fetchAlbums, id }) {
       body: JSON.stringify({
         id: faker.string.uuid(),
         title: titleInput,
-        description: descripInput,
+        description: descriptionInput,
         userId: id,
+        images: [],
       }),
     });
     fetchAlbums();
@@ -53,10 +54,8 @@ function AddAlbum({ fetchAlbums, id }) {
 
   const handleReset = () => {
     setIsExpanded(false);
-    setDescripInput("");
-    setTitleInput("");
-    setIsDescriptionError(false);
-    setIsTitleError(false);
+    resetTitle();
+    resetDescription();
   };
 
   const AlbumHeaderComponent = (
@@ -95,8 +94,8 @@ function AddAlbum({ fetchAlbums, id }) {
               errorMsg: "Please add Description!",
             }
           }
-          value={descripInput}
-          onChange={handleDescripChange}
+          value={descriptionInput}
+          onChange={handleDescriptionChange}
           placeholder="Description"
         ></Input>
       </Accordion>

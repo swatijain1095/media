@@ -3,7 +3,7 @@ import "./style.scss";
 import AddFile from "../AddImage/AddImage";
 
 function Album({ album, onDelete, updateAlbum }) {
-  const { id, title, description, userId, images } = album;
+  const { id, title, description, userId, images = [] } = album;
 
   return (
     <div>

@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { User } from "../User";
 import { AddUser } from "../AddUser";
+import { Pagination } from "../Pagination";
 
 function UserList() {
   const [users, setUsers] = useState([]);
 
-  async function fetchUsers() {
-    const response = await fetch("http://localhost:3001/users");
+  async function fetchUsers(_pageNo = 1) {
+    const response = await fetch(
+      `http://localhost:3001/users?_page=${_pageNo}`
+    );
     const users = await response.json();
     setUsers(users);
   }
@@ -28,6 +31,7 @@ function UserList() {
       {users.map((user) => (
         <User key={user.id} user={user} onDelete={deleteData} />
       ))}
+      <Pagination fetchUsers={fetchUsers} />
     </div>
   );
 }

@@ -12,7 +12,7 @@ export const useFormFields = (fields = []) => {
     return _formFields;
   };
 
-  const [formFields, setFormFields] = useState(initialiseFormFields(fields));
+  const [formFields, setFormFields] = useState(initialiseFormFields());
 
   const handleFieldChange = (event) => {
     const { id, value } = event.target;

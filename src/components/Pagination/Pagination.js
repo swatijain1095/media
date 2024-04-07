@@ -1,11 +1,15 @@
 import { GoTriangleLeft, GoTriangleRight } from "react-icons/go";
 import { Button } from "../Button";
 import "./style.scss";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/usersContext";
 
-export const Pagination = ({ fetchUsers }) => {
-  const [pageNo, setPageNo] = useState(1);
+export const Pagination = () => {
   const [isNextPageDisabled, setIsNextPageDisabled] = useState(false);
+  const {
+    setUserConfig,
+    usersConfig: { pageNo },
+  } = useContext(UserContext);
 
   const handleClick = (dir) => {
     let _pageNo = pageNo;
@@ -14,8 +18,12 @@ export const Pagination = ({ fetchUsers }) => {
     } else {
       _pageNo += 1;
     }
-    fetchUsers(_pageNo);
-    setPageNo(_pageNo);
+    setUserConfig((prevVal) => {
+      return {
+        ...prevVal,
+        pageNo: _pageNo,
+      };
+    });
     checkNextPageDisabled(_pageNo + 1);
   };
 

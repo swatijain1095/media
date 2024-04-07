@@ -32,4 +32,10 @@ span {
   display: flex;
   flex-direction: column;
   gap: 15px;
+
+  &__header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
 }

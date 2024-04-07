@@ -1,18 +1,23 @@
-import { useEffect, useState } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { User } from "../User";
 import { AddUser } from "../AddUser";
 import { Pagination } from "../Pagination";
+import { UserContext } from "../../contexts/usersContext";
 
 function UserList() {
-  const [users, setUsers] = useState([]);
+  const {
+    users,
+    setUsers,
+    usersConfig: { pageNo, order },
+  } = useContext(UserContext);
 
-  async function fetchUsers(_pageNo = 1) {
+  const fetchUsers = useCallback(async () => {
     const response = await fetch(
-      `http://localhost:3001/users?_page=${_pageNo}`
+      `http://localhost:3001/users?_page=${pageNo}&_sort=name&_order=${order}`
     );
     const users = await response.json();
     setUsers(users);
-  }
+  }, [setUsers, pageNo, order]);
 
   async function deleteData(id) {
     await fetch(`http://localhost:3001/users/${id}`, {
@@ -23,7 +28,7 @@ function UserList() {
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [fetchUsers, pageNo, order]);
 
   return (
     <div>
@@ -31,7 +36,7 @@ function UserList() {
       {users.map((user) => (
         <User key={user.id} user={user} onDelete={deleteData} />
       ))}
-      <Pagination fetchUsers={fetchUsers} />
+      <Pagination />
     </div>
   );
 }

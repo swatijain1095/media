@@ -1,12 +1,33 @@
+import { useState } from "react";
 import { UserList } from "./components/UserList";
 import "./style.scss";
+import { UserContext } from "./contexts/usersContext";
+import { Sorting } from "./components/Sorting";
 
 function App() {
+  const [users, setUsers] = useState([]);
+  const [usersConfig, setUserConfig] = useState({
+    pageNo: 1,
+    order: "asc",
+  });
+
   return (
-    <div className="app">
-      <h1>List of Users</h1>
-      <UserList />
-    </div>
+    <UserContext.Provider
+      value={{
+        users,
+        setUsers,
+        usersConfig,
+        setUserConfig,
+      }}
+    >
+      <div className="app">
+        <div className="app__header">
+          <h1>List of Users</h1>
+          <Sorting />
+        </div>
+        <UserList />
+      </div>
+    </UserContext.Provider>
   );
 }
 

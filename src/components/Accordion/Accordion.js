@@ -34,7 +34,7 @@ function Accordion({
   };
 
   return (
-    <section className={classNames("accordion", className)}>
+    <section className={classNames("accordion", className)} id={id}>
       <header className={classNames(isExpanded && "--expanded")}>
         {customHeaderComponent ? (
           customHeaderComponent

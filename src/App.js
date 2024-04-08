@@ -9,6 +9,7 @@ function App() {
   const [usersConfig, setUserConfig] = useState({
     pageNo: 1,
     order: "asc",
+    highlightId: null,
   });
 
   return (

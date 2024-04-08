@@ -6,6 +6,7 @@ export const UserContext = createContext({
   usersConfig: {
     pageNo: 1,
     order: "asc",
+    highlightId: null,
   },
   setUserConfig: () => {},
 });

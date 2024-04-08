@@ -8,7 +8,7 @@ function UserList() {
   const {
     users,
     setUsers,
-    usersConfig: { pageNo, order },
+    usersConfig: { pageNo, order, highlightId },
   } = useContext(UserContext);
 
   const fetchUsers = useCallback(async () => {
@@ -28,7 +28,7 @@ function UserList() {
 
   useEffect(() => {
     fetchUsers();
-  }, [fetchUsers, pageNo, order]);
+  }, [fetchUsers, pageNo, order, highlightId]);
 
   return (
     <div>

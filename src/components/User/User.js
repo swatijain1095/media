@@ -1,14 +1,21 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Accordion } from "../Accordion";
 import { AlbumList } from "../AlbumList";
 import "./style.scss";
 import { AddAlbum } from "../AddAlbum";
+import { UserContext } from "../../contexts/usersContext";
+import classNames from "classnames";
 
 function User({ user, onDelete }) {
   const { name, id } = user;
+  const {
+    usersConfig: { highlightId },
+    setUserConfig,
+  } = useContext(UserContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const [albums, setAlbums] = useState([]);
+  const isHighlight = highlightId === id;
 
   async function fetchAlbums() {
     setIsLoading(true);
@@ -18,6 +25,22 @@ function User({ user, onDelete }) {
     setIsLoading(false);
   }
 
+  useEffect(() => {
+    if (isHighlight) {
+      document.querySelector(`section[id="${id}"]`).scrollIntoView({
+        behavior: "smooth",
+      });
+      setTimeout(() => {
+        setUserConfig((prevVal) => {
+          return {
+            ...prevVal,
+            highlightId: null,
+          };
+        });
+      }, 2000);
+    }
+  }, [isHighlight, id, setUserConfig]);
+
   return (
     <Accordion
       title={name}
@@ -26,7 +49,7 @@ function User({ user, onDelete }) {
         val && fetchAlbums();
       }}
       onDelete={onDelete}
-      className="user"
+      className={classNames("user", isHighlight && "user--highlight")}
       isLoading={isLoading}
     >
       <>

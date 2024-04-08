@@ -6,6 +6,7 @@ const initialState = {
     pageNo: 1,
     order: "asc",
     highlightId: null,
+    searchTerm: "",
   },
 };
 

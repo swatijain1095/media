@@ -13,15 +13,16 @@ import {
 function UserList() {
   const dispatch = useDispatch();
   const users = useSelector(usersSelector);
-  const { pageNo, order, highlightId } = useSelector(usersConfigSelector);
+  const { pageNo, order, highlightId, searchTerm } =
+    useSelector(usersConfigSelector);
 
   const fetchUsers = useCallback(async () => {
     const response = await fetch(
-      `http://localhost:3001/users?_page=${pageNo}&_sort=name&_order=${order}`
+      `http://localhost:3001/users?_page=${pageNo}&_sort=name&_order=${order}&q=${searchTerm}`
     );
     const users = await response.json();
     dispatch(setUsers(users));
-  }, [dispatch, pageNo, order]);
+  }, [dispatch, pageNo, order, searchTerm]);
 
   async function deleteData(id) {
     await fetch(`http://localhost:3001/users/${id}`, {

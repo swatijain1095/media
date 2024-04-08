@@ -1,21 +1,14 @@
 import { GoTriangleUp, GoTriangleDown } from "react-icons/go";
 import { Button } from "../Button";
-import { useContext } from "react";
-import { UserContext } from "../../contexts/usersContext";
+import { useSelector, useDispatch } from "react-redux";
+import { usersConfigSelector, setUsersConfig } from "../../store/usersSlice";
 
 export const Sorting = () => {
-  const {
-    setUserConfig,
-    usersConfig: { order },
-  } = useContext(UserContext);
+  const dispatch = useDispatch();
+  const { order } = useSelector(usersConfigSelector);
 
   const handleClick = (order) => {
-    setUserConfig((prevVal) => {
-      return {
-        ...prevVal,
-        order,
-      };
-    });
+    dispatch(setUsersConfig({ order }));
   };
 
   return (

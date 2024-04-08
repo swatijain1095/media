@@ -1,17 +1,16 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Accordion } from "../Accordion";
 import { AlbumList } from "../AlbumList";
 import "./style.scss";
 import { AddAlbum } from "../AddAlbum";
-import { UserContext } from "../../contexts/usersContext";
 import classNames from "classnames";
+import { usersConfigSelector, setUsersConfig } from "../../store/usersSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 function User({ user, onDelete }) {
   const { name, id } = user;
-  const {
-    usersConfig: { highlightId },
-    setUserConfig,
-  } = useContext(UserContext);
+  const { highlightId } = useSelector(usersConfigSelector);
+  const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
   const [albums, setAlbums] = useState([]);
@@ -31,15 +30,10 @@ function User({ user, onDelete }) {
         behavior: "smooth",
       });
       setTimeout(() => {
-        setUserConfig((prevVal) => {
-          return {
-            ...prevVal,
-            highlightId: null,
-          };
-        });
+        dispatch(setUsersConfig({ highlightId: null }));
       }, 2000);
     }
-  }, [isHighlight, id, setUserConfig]);
+  }, [isHighlight, id, dispatch]);
 
   return (
     <Accordion

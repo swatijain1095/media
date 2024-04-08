@@ -1,4 +1,5 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Accordion } from "../Accordion";
 import { Button } from "../Button";
 import "./style.scss";
@@ -6,16 +7,14 @@ import { faker } from "@faker-js/faker";
 import { GoX } from "react-icons/go";
 import { Input } from "../Input";
 import { useFormFields } from "../../hooks/useFormFields";
-import { UserContext } from "../../contexts/usersContext";
+import { usersConfigSelector, setUsersConfig } from "../../store/usersSlice";
 
 function AddUser({ fetchUsers }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const { formFields, handleFieldChange, checkFieldError, resetFields } =
     useFormFields(["user"]);
-  const {
-    usersConfig: { order, highlightId },
-    setUserConfig,
-  } = useContext(UserContext);
+  const { order } = useSelector(usersConfigSelector);
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     if (!isExpanded) {
@@ -50,13 +49,12 @@ function AddUser({ fetchUsers }) {
     const userList = await response.json();
     const index = userList.findIndex((user) => user.id === id);
     const pageNo = Math.ceil((index + 1) / 10);
-    setUserConfig((prevVal) => {
-      return {
-        ...prevVal,
+    dispatch(
+      setUsersConfig({
         pageNo,
         highlightId: id,
-      };
-    });
+      })
+    );
   };
 
   const handleReset = () => {

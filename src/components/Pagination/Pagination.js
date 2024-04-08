@@ -1,15 +1,15 @@
 import { GoTriangleLeft, GoTriangleRight } from "react-icons/go";
 import { Button } from "../Button";
 import "./style.scss";
-import { useContext, useState } from "react";
-import { UserContext } from "../../contexts/usersContext";
+import { useState } from "react";
+import { usersConfigSelector, setUsersConfig } from "../../store/usersSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Pagination = () => {
   const [isNextPageDisabled, setIsNextPageDisabled] = useState(false);
-  const {
-    setUserConfig,
-    usersConfig: { pageNo },
-  } = useContext(UserContext);
+
+  const { pageNo } = useSelector(usersConfigSelector);
+  const dispatch = useDispatch();
 
   const handleClick = (dir) => {
     let _pageNo = pageNo;
@@ -18,12 +18,7 @@ export const Pagination = () => {
     } else {
       _pageNo += 1;
     }
-    setUserConfig((prevVal) => {
-      return {
-        ...prevVal,
-        pageNo: _pageNo,
-      };
-    });
+    dispatch(setUsersConfig({ pageNo: _pageNo }));
     checkNextPageDisabled(_pageNo + 1);
   };
 

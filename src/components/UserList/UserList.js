@@ -1,23 +1,27 @@
-import { useCallback, useContext, useEffect } from "react";
+import { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { User } from "../User";
 import { AddUser } from "../AddUser";
 import { Pagination } from "../Pagination";
-import { UserContext } from "../../contexts/usersContext";
+
+import {
+  setUsers,
+  usersSelector,
+  usersConfigSelector,
+} from "../../store/usersSlice";
 
 function UserList() {
-  const {
-    users,
-    setUsers,
-    usersConfig: { pageNo, order, highlightId },
-  } = useContext(UserContext);
+  const dispatch = useDispatch();
+  const users = useSelector(usersSelector);
+  const { pageNo, order, highlightId } = useSelector(usersConfigSelector);
 
   const fetchUsers = useCallback(async () => {
     const response = await fetch(
       `http://localhost:3001/users?_page=${pageNo}&_sort=name&_order=${order}`
     );
     const users = await response.json();
-    setUsers(users);
-  }, [setUsers, pageNo, order]);
+    dispatch(setUsers(users));
+  }, [dispatch, pageNo, order]);
 
   async function deleteData(id) {
     await fetch(`http://localhost:3001/users/${id}`, {

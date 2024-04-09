@@ -2,13 +2,18 @@ import { GoTriangleLeft, GoTriangleRight } from "react-icons/go";
 import { Button } from "../Button";
 import "./style.scss";
 import { useState } from "react";
-import { usersConfigSelector, setUsersConfig } from "../../store/usersSlice";
+import {
+  usersConfigSelector,
+  setUsersConfig,
+  usersSelector,
+} from "../../store/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { getFilteredUsers } from "../../utilities/getFilteredUsers";
 
 export const Pagination = () => {
   const [isNextPageDisabled, setIsNextPageDisabled] = useState(false);
-
-  const { pageNo } = useSelector(usersConfigSelector);
+  const users = useSelector(usersSelector);
+  const { pageNo, order, searchTerm } = useSelector(usersConfigSelector);
   const dispatch = useDispatch();
 
   const handleClick = (dir) => {
@@ -23,11 +28,13 @@ export const Pagination = () => {
   };
 
   async function checkNextPageDisabled(nextPage) {
-    const response = await fetch(
-      `http://localhost:3001/users?_page=${nextPage}`
-    );
-    const users = await response.json();
-    setIsNextPageDisabled(users.length === 0);
+    const nextPageUsers = getFilteredUsers({
+      users,
+      order,
+      searchTerm,
+      pageNo: nextPage,
+    });
+    setIsNextPageDisabled(nextPageUsers.length === 0);
   }
 
   return (

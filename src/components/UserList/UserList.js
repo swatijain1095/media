@@ -3,30 +3,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { User } from "../User";
 import { AddUser } from "../AddUser";
 import { Pagination } from "../Pagination";
-
 import {
   setUsers,
   usersSelector,
   usersConfigSelector,
-  useDisplayUsersSelector,
-  setDisplayUsers,
+  filteredUsersSelector,
+  setFilteredUsers,
 } from "../../store/usersSlice";
+import { getFilteredUsers } from "../../utilities/getFilteredUsers";
 
 function UserList() {
   const dispatch = useDispatch();
-  const users = useSelector(useDisplayUsersSelector);
+  const users = useSelector(usersSelector);
+  const filteredUsers = useSelector(filteredUsersSelector);
   const { pageNo, order, highlightId, searchTerm } =
     useSelector(usersConfigSelector);
 
   const fetchUsers = useCallback(async () => {
-    const response = await fetch(
-      // `http://localhost:3001/users?_page=${pageNo}&_sort=name&_order=${order}&q=${searchTerm}`
-      `http://localhost:3001/users?_page=${pageNo}&_sort=name&_order=${order}`
-    );
-    const users = await response.json();
-    dispatch(setUsers(users));
-    dispatch(setDisplayUsers(users));
-  }, [dispatch, pageNo, order]);
+    const response = await fetch(`http://localhost:3001/users`);
+    const data = await response.json();
+    dispatch(setUsers(data));
+  }, [dispatch]);
 
   async function deleteData(id) {
     await fetch(`http://localhost:3001/users/${id}`, {
@@ -37,12 +34,25 @@ function UserList() {
 
   useEffect(() => {
     fetchUsers();
-  }, [fetchUsers, pageNo, order, highlightId]);
+  }, [fetchUsers, highlightId]);
+
+  useEffect(() => {
+    dispatch(
+      setFilteredUsers(
+        getFilteredUsers({
+          users,
+          pageNo,
+          order,
+          searchTerm,
+        })
+      )
+    );
+  }, [users, pageNo, order, searchTerm, dispatch]);
 
   return (
     <div>
       <AddUser fetchUsers={fetchUsers} />
-      {users.map((user) => (
+      {filteredUsers.map((user) => (
         <User key={user.id} user={user} onDelete={deleteData} />
       ))}
       <Pagination />

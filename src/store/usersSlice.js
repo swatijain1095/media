@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   users: [],
-  displayUsers: [],
+  filteredUsers: [],
   usersConfig: {
     pageNo: 1,
     order: "asc",
@@ -24,14 +24,15 @@ export const usersSlice = createSlice({
         ...action.payload,
       };
     },
-    setDisplayUsers: (state, action) => {
-      state.displayUsers = action.payload;
+    setFilteredUsers: (state, action) => {
+      state.filteredUsers = action.payload;
     },
   },
 });
 
-export const { setUsers, setUsersConfig, setDisplayUsers } = usersSlice.actions;
+export const { setUsers, setUsersConfig, setFilteredUsers } =
+  usersSlice.actions;
 export const usersSelector = (state) => state.users.users;
-export const useDisplayUsersSelector = (state) => state.users.displayUsers;
+export const filteredUsersSelector = (state) => state.users.filteredUsers;
 export const usersConfigSelector = (state) => state.users.usersConfig;
 export default usersSlice.reducer;
